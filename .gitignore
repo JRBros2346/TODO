@@ -1,5 +1,3 @@
 todo.sqlite*
 
-# Added by cargo
-
-/target
+/client/target
