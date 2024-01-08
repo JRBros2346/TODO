@@ -58,7 +58,7 @@ const U = db.transaction((i, t, c, s) => {
     db.query(`UPDATE todo SET created=?2 WHERE id=?1`).run(i, c);
   if (s!==null)
     db.query(`UPDATE todo SET status=?2 WHERE id=?1`).run(i, s);
-  return new Response();
+  return Response.json(db.query(`SELECT * FROM todo WHERE id=?1`).get(i));
 });
 /**
  * Transaction D:
@@ -67,8 +67,9 @@ const U = db.transaction((i, t, c, s) => {
  * @returns {Response} - Empty Again...
  */
 const D = db.transaction((id) => {
+  const d = db.query(`SELECT * FROM todo WHERE id=?1`).get(id);
   db.query(`DELETE FROM todo WHERE id=?1`).run(id);
-  return new Response();
+  return Response.json(d);
 });
 
 /**
@@ -79,10 +80,8 @@ const D = db.transaction((id) => {
  * @returns {boolean} True or False (We assume none of our data is in superposition :P)
  */
 function exists(id) {
-  return new Boolean(
-    db.query(`SELECT EXISTS(SELECT 1 FROM todo WHERE id=?1 LIMIT 1)`)
-      .get(id)[`EXISTS(SELECT 1 FROM todo WHERE id=?1 LIMIT 1`]
-  )
+  return db.query(`SELECT EXISTS(SELECT 1 FROM todo WHERE id=?1 LIMIT 1)`)
+    .get(id)[`EXISTS(SELECT 1 FROM todo WHERE id=?1 LIMIT 1)`]===1;
 }
 
 // Listen for ^C event (Used to Shutdown Server).
@@ -97,37 +96,30 @@ process.on("SIGINT", async () => {
 const server = Bun.serve({
   port: 6969, // 69 :P
   async fetch(req) {
-    const {method} = req;
     const {pathname} = new URL(req.url);
-    console.log(method, pathname);
+    const body = req.body===null ? null : await Bun.readableStreamToJSON(req.body)??null;
+    console.log(pathname, body);
 
     try {
-      switch (method) {
-        case 'POST': {
-          const body = await Bun.readableStreamToJSON(req.body);
-          console.log(body);
-          if (exists(body.id)) {
-            return U(
-              body.id,
-              body.task??null,
-              body.created??null,
-              body.status??null
-            ); // UPDATE
-          }
-          else return C(
+      if (body===null) {
+        if (pathname==='/')
+          return R(); // READ
+        else
+          return D(+pathname.slice(1)); // DELETE
+      } else {
+        if (exists(body.id))
+          return U(
+            body.id,
+            body.task??null,
+            body.created??null,
+            body.status??null
+          ); // UPDATE
+        else return C(
             body.id??null,
             body.task,
             body.created??null,
             body.status??false
           ); // CREATE
-        }
-        case 'GET': {
-          if (pathname==='/')
-            return R(); // READ
-          else
-            return D(+pathname.slice(1)); // DELETE
-        }
-        default: return Response.error(); // I hope this codepoint will never be reached...
       }
     } catch(e) {
       console.error("Error: ", e.message); // And this will hopefully never be triggerred :eyes:...

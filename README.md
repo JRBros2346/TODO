@@ -5,7 +5,7 @@ _Preferred Working Environment WSL._
 1. Install [bun](www.bun.sh)
 2. Run `bun spine.js`
 # Important Info
-Server Should run in [localhost](127.0.0.1:6969). Read the implementation [documented in this file](/spine.js). Rigorously tested using `curl`. I could not deploy it `:(`
+Server Should run in [localhost](127.0.0.1:6969) (GitHub don't support these links http://127.0.0.1:6969). Read the implementation [documented in this file](/spine.js). Rigorously tested using `curl`. I could not deploy it `:(`
 # Some Images
 ![Alt Text](/imgs/Screenshot%202024-01-07%20183721.png "My Image")
 ![Alt Text](/imgs/Screenshot%202024-01-07%20183829.png "My Image")
