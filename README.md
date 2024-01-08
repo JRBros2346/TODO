@@ -1,5 +1,5 @@
 # Preface
-This is my attempt on the TODO list. This is a Submission for Web Dev team to get me into Web Dev team. **Please Select Me**. ~~I may not know how to setup and test `PUT`, `DELETE` etc., methods, but I've done my best using just `GET` and `POST`~~ `GET`, `POST`, `PUT` and `DELETE` Should all work now, but it has not been tested yet. I have done my best to do it. I assure you, I will learn more after joining the team and be MORE productive. Thank you `:D`
+This is my attempt on the TODO list. This is a Submission for Web Dev team to get me into Web Dev team. **Please Select Me**. ~~I may not know how to setup and test `PUT`, `DELETE` etc., methods, but I've done my best using just `GET` and `POST`.~~ **`GET`, `POST`, `PUT` and `DELETE` Should all work now, but it has not been tested yet.** I have done my best to do it. I assure you, I will learn more after joining the team and be MORE productive. Thank you `:D`
 # Setup
 _Preferred Working Environment WSL._
 1. Install [bun](www.bun.sh)
