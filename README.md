@@ -6,10 +6,15 @@ _Preferred Working Environment WSL._
 2. Run `bun spine.js`
 # Important Info
 Server Should run in [localhost](127.0.0.1:6969) (GitHub don't support these links http://127.0.0.1:6969). Read the implementation [documented in this file](/spine.js). Rigorously tested using `curl`. I could not deploy it `:(`
+## The Next Day
+Tested using Python Script and Recorded the results
 # Some Images
-![Alt Text](/imgs/Screenshot%202024-01-07%20183721.png "My Image")
-![Alt Text](/imgs/Screenshot%202024-01-07%20183829.png "My Image")
-![Alt Text](/imgs/Screenshot%202024-01-07%20183956.png "My Image")
+![`curl` logs](/imgs/Screenshot%202024-01-07%20183721.png "`curl` logs")
+![server logs](/imgs/Screenshot%202024-01-07%20183829.png "server logs")
+![FireFox READ](/imgs/Screenshot%202024-01-07%20183956.png "FireFox READ")
+# Python Client Script Testing
+![client.py scripting](/imgs/client.png "client.py scripting")
+![server recording GIF](/asciinema/server.gif "server recording GIF")
 <br/>
 <br/>
 <br/>

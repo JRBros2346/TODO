@@ -1,3 +1,5 @@
 todo.sqlite*
 
 /client/target
+
+__pycache__/
